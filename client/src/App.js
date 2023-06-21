@@ -7,6 +7,7 @@ import { Register } from './pages/register';
 import { MenuUtama } from './components/menuUtama';
 import Navbar from './components/navbar'
 import Header from './components/header';
+import Beranda from './pages/beranda';
 
 function App() {
   const [login, setLogin] = useState(false)
@@ -28,10 +29,9 @@ function App() {
             <div className="flex-auto h-full ">
               <Header />
               <Routes>
-                <Route path='/' element={<MenuUtama />} />
-
+                <Route path='/' element={<Beranda />} />
               </Routes>
-              <button onClick={handleLogin}>login</button>
+              {/* <button onClick={handleLogin}>login</button> */}
             </div>
           </>
         )}
@@ -39,5 +39,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
