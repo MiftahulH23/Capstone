@@ -3,11 +3,13 @@ import './App.css';
 import Login from './pages/login'
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Register } from './pages/register';
-import { MenuUtama } from './components/menuUtama';
 import Navbar from './components/navbar'
 import Header from './components/header';
 import Beranda from './pages/beranda';
+import PesananSaya from './pages/PesananSaya';
+import TentangKami from './pages/TentangKami';
+import Menu from './pages/Menu';
+
 
 function App() {
   const [login, setLogin] = useState(false)
@@ -30,6 +32,9 @@ function App() {
               <Header />
               <Routes>
                 <Route path='/' element={<Beranda />} />
+                <Route path='/menu' element={<Menu />} />
+                <Route path='/pesanan' element={<PesananSaya />} />
+                <Route path='/tentang' element={<TentangKami />} />
               </Routes>
               {/* <button onClick={handleLogin}>login</button> */}
             </div>

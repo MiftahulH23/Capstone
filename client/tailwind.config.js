@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         background: '#EDF1FC',
         primary: '#5A55D2',
+        hijau: '#00DEA3'
       },
     },
   },
