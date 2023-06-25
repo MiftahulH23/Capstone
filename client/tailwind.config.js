@@ -8,7 +8,8 @@ module.exports = {
       colors: {
         background: '#EDF1FC',
         primary: '#5A55D2',
-        hijau: '#00DEA3'
+        hijau: '#00DEA3',
+        gold: '#EC910A',
       },
     },
   },
