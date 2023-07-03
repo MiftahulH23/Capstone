@@ -1,12 +1,67 @@
 import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/img/logo.png";
+import { BerandaIcon, PesananIcon, MenuIcon, AboutIcon } from "./Svg";
+const Navbar = ({ user }) => {
+  const Menu = {
+    customer: [
+      ["Beranda", "/"],
+      ["Menu", "/menu"],
+      ["Pesanan", "/pesanan"],
+      ["Tentang", "/tentang"],
+    ],
+    admin : [
+      ["Beranda", "/"],
+      ["Tentang", "/tentang"],
+    ],
+    supplier : [
+      ["Beranda", "/"],
+      ["Pesanan", "/pesanan"],
+    ]
+  };
 
-const Navbar = () => {
   return (
     <div className="flex-none flex flex-col items-center w-[15%] h-screen px-5 bg-white py-20">
       <img src={Logo} alt="" className="w-[100%]" />
       <ul className="flex flex-col gap-3 mt-20">
-        <NavLink to={'/'} className={({isActive})=> isActive? 'text-hijau stroke-hijau':'text-black stroke-black'}>
+        {Menu[user].map(([name, path], i) => (
+          <li key={i}>
+            <NavLink
+              to={path}
+              className={({ isActive }) =>
+                isActive ? "text-hijau stroke-hijau" : "text-black stroke-black"
+              }
+            >
+              <div className="flex gap-3">
+                {user === "admin"
+                  ? (() => {
+                      switch (name) {
+                        case "Beranda":
+                          return <BerandaIcon />;
+                        case "Tentang":
+                          return <AboutIcon />;
+                        default:
+                          return null;
+                      }
+                    })()
+                  : (() => {
+                      switch (name) {
+                        case "Beranda":
+                          return <BerandaIcon />;
+                        case "Menu":
+                          return <MenuIcon />;
+                        case "Pesanan":
+                          return <PesananIcon />;
+                        case "Tentang":
+                          return <AboutIcon />;
+                      }
+                    })()}
+                <span>{name}</span>
+              </div>
+            </NavLink>
+          </li>
+        ))}
+        {/* <NavLink to={'/'} className={({isActive})=> isActive? 'text-hijau stroke-hijau':'text-black stroke-black'}>
           <li className="flex gap-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +153,7 @@ const Navbar = () => {
             />
           </svg>
           Login
-        </li>
+        </li> */}
       </ul>
     </div>
   );

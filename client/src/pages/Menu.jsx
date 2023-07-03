@@ -1,13 +1,14 @@
 import React from "react";
 import Nusantara from "../assets/img/nusantara.png";
+import Avocado from "../assets/img/avocado.png";
 
 const CardMenu = (props) => {
   return (
-    <div className="bg-white rounded-xl w-[70%] shadow-2xl">
-      <div className="grid place-items-center">
-        <img src={props.img} alt="" className="w-[50%] place-item-center" />
+    <div className="bg-white flex flex-col justify-between rounded-xl w-full h-full shadow-2xl items-center">
+      <div className="grid place-items-center w-1/2 h-full overflow-hidden">
+        <img src={props.img} alt="" className="w-full h-full object-contain" />
       </div>
-      <div className="flex justify-between mx-2 mt-3">
+      <div className="flex justify-between mx-2 mt-3 w-full">
         <div>
           <p className="text-red-600">{props.produk}</p>
           <p>{props.stock}</p>
@@ -48,17 +49,17 @@ const CardMenu = (props) => {
 
 const Menu = () => {
   return (
-    <div>
+    <>
       <h1 className="text-2xl font-bold ml-10 mt-8">Menu</h1>
-      <div className="grid grid-cols-3 gap-y-[4%] place-items-center ml-10 mt-10">
+      <div className="grid grid-cols-3 gap-5 place-items-center mx-10 mt-10">
         <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
-        <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
+        <CardMenu img={Avocado} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
         <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
         <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
         <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
         <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
       </div>
-    </div>
+    </>
   );
 };
 

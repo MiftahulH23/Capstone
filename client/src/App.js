@@ -15,6 +15,8 @@ function App() {
   const [login, setLogin] = useState(false)
   const handleLogin = () => setLogin(!login)
 
+  const [user, setUser] = useState("customer");
+
   return (
     <Router>
       <div className={`w-full h-screen  bg-background ${login? 'grid place-items-center' : 'flex'}`}>
@@ -26,9 +28,9 @@ function App() {
         ) : (
           <>
             {/* kiri */}
-            <Navbar />
+            <Navbar user={user} />
             {/* kanan */}
-            <div className="flex-auto h-full ">
+            <div className="flex-auto h-screen overflow-y-scroll ">
               <Header />
               <Routes>
                 <Route path='/' element={<Beranda />} />
