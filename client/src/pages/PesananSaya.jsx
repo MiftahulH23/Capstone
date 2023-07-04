@@ -1,4 +1,5 @@
-import CardPembayaran from "../components/cardPembayaran";
+
+import { PembayaranCard } from "../components/Card";
 import CardPesananSaya from "../components/CardPesananSaya";
 
 
@@ -11,7 +12,7 @@ const PesananSaya = () => {
         <CardPesananSaya produk={'Esteh Susu Nusantara'} harga={'15K'} />
         <CardPesananSaya produk={'Esteh Susu Nusantara'} harga={'15K'} />
       </div>
-      <CardPembayaran />
+      <PembayaranCard />
     </div>
   );
 };

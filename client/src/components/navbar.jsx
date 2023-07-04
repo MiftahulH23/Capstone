@@ -1,7 +1,15 @@
 import { NavLink } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Logo from "../assets/img/logo.png";
-import { BerandaIcon, PesananIcon, MenuIcon, AboutIcon } from "./Svg";
+import {
+  BerandaIcon,
+  PesananIcon,
+  MenuIcon,
+  AboutIcon,
+  DashboardIcon,
+  PersediaanIcon,
+  InputPesanan,
+} from "./Svg";
 const Navbar = ({ user }) => {
   const Menu = {
     customer: [
@@ -10,14 +18,15 @@ const Navbar = ({ user }) => {
       ["Pesanan", "/pesanan"],
       ["Tentang", "/tentang"],
     ],
-    admin : [
-      ["Beranda", "/"],
-      ["Tentang", "/tentang"],
+    admin: [
+      ["Dashboard", "/dashboard"],
+      ["Input Pesanan", "/inputpesanan"],
+      ["Persediaan", "/persediaan"],
     ],
-    supplier : [
+    supplier: [
       ["Beranda", "/"],
       ["Pesanan", "/pesanan"],
-    ]
+    ],
   };
 
   return (
@@ -32,14 +41,16 @@ const Navbar = ({ user }) => {
                 isActive ? "text-hijau stroke-hijau" : "text-black stroke-black"
               }
             >
-              <div className="flex gap-3">
+              <div className="flex gap-3 items-center">
                 {user === "admin"
                   ? (() => {
                       switch (name) {
-                        case "Beranda":
-                          return <BerandaIcon />;
-                        case "Tentang":
-                          return <AboutIcon />;
+                        case "Dashboard":
+                          return <DashboardIcon />;
+                        case "Persediaan":
+                          return <PersediaanIcon />;
+                        case "Input Pesanan":
+                          return <InputPesanan />;
                         default:
                           return null;
                       }
