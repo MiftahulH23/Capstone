@@ -18,7 +18,7 @@ function App() {
   const [login, setLogin] = useState(false)
   const handleLogin = () => setLogin(!login)
 
-  const [user, setUser] = useState("admin");
+  const [user, setUser] = useState("customer");
 
   return (
     <Router>
