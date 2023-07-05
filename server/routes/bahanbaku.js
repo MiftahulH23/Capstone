@@ -6,86 +6,82 @@ const ObjectId = require("mongodb").ObjectId;
 recordRoutes.use(express.urlencoded({ extended: true }));
 
 // menampilkan data
-recordRoutes.route("/customer").get(function (req, res) {
+recordRoutes.route("/bahanbaku").get(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   db_connect
-    .collection("customer")
+    .collection("bahanbaku")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);
     })
     .then((data) => {
-      console.log('customer berhasil ditampilkan')
+      console.log('bahan baku berhasil ditampilkan')
       res.json({
-        message: "customer berhasil ditampilkan",
+        message: "bahan baku berhasil ditampilkan",
         data: data,
       });
     });
 });
 
 // menampilkan data by id
-recordRoutes.route("/customer/:id").get(function (req, res) {
+recordRoutes.route("/bahanbaku/:id").get(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myquery = { _id: new ObjectId(req.params.id) };
   db_connect
-    .collection("customer")
+    .collection("bahanbaku")
     .findOne(myquery, function (err, result) {
       if (err) throw err;
       res.json(result);
     })
     .then((data) => {
-      console.log('customer berhasil ditampilkan')
+      console.log('bahan baku berhasil ditampilkan')
       res.json({
-        message: "customer berhasil ditampilkan",
+        message: "bahan baku berhasil ditampilkan",
         data: data,
       });
     });
 });
 
 // menambahkan data
-recordRoutes.route("/customer/add").post(function (req, res) {
+recordRoutes.route("/bahanbaku/add").post(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myObj = {
     nama: req.body.nama,
-    alamat: req.body.alamat,
-    nohp: req.body.nohp,
   };
   db_connect
-    .collection("customer")
+    .collection("bahanbaku")
     .insertOne(myObj, function (err, result) {
       if (err) throw err;
       res.json(result);
     })
     .then(() => {
-      console.log('customer berhasil ditambahkan')
+      console.log('bahan baku berhasil ditambahkan')
       res.json({
-        message: "customer berhasil ditambahkan",
+        message: "bahan baku berhasil ditambahkan",
         data: myObj,
       });
     });
 });
 
 // mengupdate data
-recordRoutes.route("/customer/update/:id").put(function (req, res) {
+recordRoutes.route("/bahanbaku/update/:id").put(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myquery = { _id: new ObjectId(req.params.id) };
   let newValues = {
     $set: {
       nama: req.body.nama,
-      alamat: req.body.alamat,
-      nohp: req.body.nohp,
     },
   };
   db_connect
-    .collection("customer")
+    .collection("bahanbaku")
     .updateOne(myquery, newValues, function (err, result) {
       if (err) throw err;
-      console.log("berhasil update customer");
+      console.log("berhasil update bahan baku");
       res.json(result);
     })
     .then(() => {
-      console.log("berhasil update customer");
+      console.log("berhasil update bahan baku");
       res.json({
         message: "Data berhasil diupdate",
         data: newValues,
@@ -94,20 +90,20 @@ recordRoutes.route("/customer/update/:id").put(function (req, res) {
 });
 
 // menghapus data
-recordRoutes.route("/customer/delete/:id").delete(function (req, res) {
+recordRoutes.route("/bahanbaku/delete/:id").delete(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myquery = { _id: new ObjectId(req.params.id) };
   db_connect
-    .collection("customer")
+    .collection("bahanbaku")
     .deleteOne(myquery, function (err, result) {
       if (err) throw err;
-      console.log("customer berhasil dihapus");
+      console.log("bahan baku berhasil dihapus");
       res.json(result);
     })
     .then((data) => {
-      console.log("customer berhasil dihapus");
+      console.log("bahan baku berhasil dihapus");
       res.json({
-        message: "customer berhasil dihapus",
+        message: "bahan baku berhasil dihapus",
         data: data,
       });
     });

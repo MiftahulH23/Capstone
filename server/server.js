@@ -19,11 +19,11 @@ app.listen(port, () => {
 
 // get routes
 const user = require("./routes/user");
-const cashier = require("./routes/cashier");
+const cashier = require("./routes/kasir");
 const supplier = require("./routes/supplier");
-const customer = require("./routes/customer");
-const product = require("./routes/product.js");
-const material = require("./routes/material");
+const customer = require("./routes/pelanggan");
+const product = require("./routes/produk.js");
+const material = require("./routes/bahanbaku");
 const productsOrders = require("./routes/productsOrders");
 const materialsOrders = require("./routes/materialsOrders");
 

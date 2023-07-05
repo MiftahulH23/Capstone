@@ -6,84 +6,86 @@ const ObjectId = require("mongodb").ObjectId;
 recordRoutes.use(express.urlencoded({ extended: true }));
 
 // menampilkan data
-recordRoutes.route("/cashier").get(function (req, res) {
+recordRoutes.route("/pelanggan").get(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   db_connect
-    .collection("cashier")
+    .collection("pelanggan")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);
     })
     .then((data) => {
-      console.log('cashier berhasil ditampilkan')
+      console.log('pelanggan berhasil ditampilkan')
       res.json({
-        message: "cashier berhasil ditampilkan",
+        message: "pelanggan berhasil ditampilkan",
         data: data,
       });
     });
 });
 
 // menampilkan data by id
-recordRoutes.route("/cashier/:id").get(function (req, res) {
+recordRoutes.route("/pelanggan/:id").get(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myquery = { _id: new ObjectId(req.params.id) };
   db_connect
-    .collection("cashier")
+    .collection("pelanggan")
     .findOne(myquery, function (err, result) {
       if (err) throw err;
       res.json(result);
     })
     .then((data) => {
-      console.log('cashier berhasil ditampilkan')
+      console.log('pelanggan berhasil ditampilkan')
       res.json({
-        message: "cashier berhasil ditampilkan",
+        message: "pelanggan berhasil ditampilkan",
         data: data,
       });
     });
 });
 
 // menambahkan data
-recordRoutes.route("/cashier/add").post(function (req, res) {
+recordRoutes.route("/pelanggan/add").post(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myObj = {
     nama: req.body.nama,
+    alamat: req.body.alamat,
     nohp: req.body.nohp,
   };
   db_connect
-    .collection("cashier")
+    .collection("pelanggan")
     .insertOne(myObj, function (err, result) {
       if (err) throw err;
       res.json(result);
     })
     .then(() => {
-      console.log('cashier berhasil ditambahkan')
+      console.log('pelanggan berhasil ditambahkan')
       res.json({
-        message: "cashier berhasil ditambahkan",
+        message: "pelanggan berhasil ditambahkan",
         data: myObj,
       });
     });
 });
 
 // mengupdate data
-recordRoutes.route("/cashier/update/:id").put(function (req, res) {
+recordRoutes.route("/pelanggan/update/:id").put(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myquery = { _id: new ObjectId(req.params.id) };
   let newValues = {
     $set: {
       nama: req.body.nama,
+      alamat: req.body.alamat,
       nohp: req.body.nohp,
     },
   };
   db_connect
-    .collection("cashier")
+    .collection("pelanggan")
     .updateOne(myquery, newValues, function (err, result) {
       if (err) throw err;
-      console.log("berhasil update cashier");
+      console.log("berhasil update pelanggan");
       res.json(result);
     })
     .then(() => {
-      console.log("berhasil update cashier");
+      console.log("berhasil update pelanggan");
       res.json({
         message: "Data berhasil diupdate",
         data: newValues,
@@ -92,20 +94,20 @@ recordRoutes.route("/cashier/update/:id").put(function (req, res) {
 });
 
 // menghapus data
-recordRoutes.route("/cashier/delete/:id").delete(function (req, res) {
+recordRoutes.route("/pelanggan/delete/:id").delete(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myquery = { _id: new ObjectId(req.params.id) };
   db_connect
-    .collection("cashier")
+    .collection("pelanggan")
     .deleteOne(myquery, function (err, result) {
       if (err) throw err;
-      console.log("cashier berhasil dihapus");
+      console.log("pelanggan berhasil dihapus");
       res.json(result);
     })
     .then((data) => {
-      console.log("cashier berhasil dihapus");
+      console.log("pelanggan berhasil dihapus");
       res.json({
-        message: "cashier berhasil dihapus",
+        message: "pelanggan berhasil dihapus",
         data: data,
       });
     });
