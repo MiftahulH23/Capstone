@@ -12,6 +12,11 @@ import Persediaan from './pages/Persediaan';
 import Menu from './pages/Menu';
 import Dashboard from './pages/Dashboard';
 import InputPesanan from './pages/InputPesanan';
+import DashboardSupplier from './pages/DashboardSupplier';
+import PersediaanSupplier from './pages/PersediaanSupplier';
+import Pesananmasuk from './pages/Pesananmasuk';
+import Product from './pages/Product';
+import Bahanbaku from './pages/Bahanbaku';
 
 
 function App() {
@@ -35,13 +40,29 @@ function App() {
             <div className="flex-auto h-screen overflow-y-scroll ">
               <Header />
               <Routes>
-                <Route path='/' element={<Beranda />} />
-                <Route path='/menu' element={<Menu />} />
-                <Route path='/pesanan' element={<PesananSaya />} />
-                <Route path='/tentang' element={<TentangKami />} />
-                <Route path='/persediaan' element={<Persediaan />} />
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path='/inputpesanan' element={<InputPesanan />} />
+                {user === "admin"? (
+                  <>
+                  <Route path='/' element={<Dashboard />} />
+                  <Route path='/product' element={<Product />} />
+                  <Route path='/bahanbaku' element={<Bahanbaku />} />
+                  <Route path='/inputpesanan' element={<InputPesanan />} />
+                  </>
+                ):user === "supplier"? (
+                  <>
+                  <Route path='/' element={<DashboardSupplier />} />
+                  <Route path='/persediaansupplier' element={<PersediaanSupplier />} />
+                  <Route path='/pesananmasuk' element={<Pesananmasuk />} />
+
+                  </>
+
+                ):(
+                  <>
+                  <Route path='/' element={<Beranda />} />
+                  <Route path='/menu' element={<Menu />} />
+                  <Route path='/pesanan' element={<PesananSaya />} />
+                  <Route path='/tentang' element={<TentangKami />} />
+                  </>
+                )}
               </Routes>
               {/* <button onClick={handleLogin}>login</button> */}
             </div>

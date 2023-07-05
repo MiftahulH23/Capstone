@@ -8,9 +8,9 @@ const CardMenu = (props) => {
       <div className="grid place-items-center w-1/2 h-full overflow-hidden">
         <img src={props.img} alt="" className="w-full h-full object-contain" />
       </div>
-      <div className="flex justify-between mx-2 mt-3 w-full">
+      <div className="flex justify-between px-5 mt-3 w-full">
         <div>
-          <p className="text-red-600">{props.produk}</p>
+          <p className="">{props.produk}</p>
           <p>{props.stock}</p>
           <p>{props.harga}</p>
         </div>
