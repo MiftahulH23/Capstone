@@ -9,6 +9,7 @@ import {
   DashboardIcon,
   PersediaanIcon,
   InputPesanan,
+  Order,
 } from "./Svg";
 const Navbar = ({ user }) => {
   const Menu = {
@@ -19,13 +20,15 @@ const Navbar = ({ user }) => {
       ["Tentang", "/tentang"],
     ],
     admin: [
-      ["Dashboard", "/dashboard"],
+      ["Dashboard", "/"],
       ["Input Pesanan", "/inputpesanan"],
-      ["Persediaan", "/persediaan"],
+      ["Product", "/product"],
+      ["Bahan Baku", "/bahanbaku"],
     ],
     supplier: [
-      ["Beranda", "/"],
-      ["Pesanan", "/pesanan"],
+      ["Dashboard", "/"],
+      ["Persediaan", "/persediaansupplier"],
+      ["Pesanan Masuk", "/pesananmasuk"],
     ],
   };
 
@@ -47,7 +50,9 @@ const Navbar = ({ user }) => {
                       switch (name) {
                         case "Dashboard":
                           return <DashboardIcon />;
-                        case "Persediaan":
+                        case "Product":
+                          return <PersediaanIcon />;
+                        case "Bahan Baku":
                           return <PersediaanIcon />;
                         case "Input Pesanan":
                           return <InputPesanan />;
@@ -65,6 +70,12 @@ const Navbar = ({ user }) => {
                           return <PesananIcon />;
                         case "Tentang":
                           return <AboutIcon />;
+                        case "Dashboard":
+                          return <DashboardIcon />;
+                        case "Persediaan":
+                          return <PersediaanIcon />;
+                        case "Pesanan Masuk":
+                          return <Order />;
                       }
                     })()}
                 <span>{name}</span>

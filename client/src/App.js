@@ -12,6 +12,11 @@ import Persediaan from './pages/Persediaan';
 import Menu from './pages/Menu';
 import Dashboard from './pages/Dashboard';
 import InputPesanan from './pages/InputPesanan';
+import DashboardSupplier from './pages/DashboardSupplier';
+import PersediaanSupplier from './pages/PersediaanSupplier';
+import Pesananmasuk from './pages/Pesananmasuk';
+import Product from './pages/Product';
+import Bahanbaku from './pages/Bahanbaku';
 
 
 function App() {
@@ -37,14 +42,16 @@ function App() {
               <Routes>
                 {user === "admin"? (
                   <>
-                  <Route path='/dashboard' element={<Dashboard />} />
-                  <Route path='/persediaan' element={<Persediaan />} />
+                  <Route path='/' element={<Dashboard />} />
+                  <Route path='/product' element={<Product />} />
+                  <Route path='/bahanbaku' element={<Bahanbaku />} />
                   <Route path='/inputpesanan' element={<InputPesanan />} />
                   </>
                 ):user === "supplier"? (
                   <>
-                  <Route path='/' element={<Beranda />} />
-                  <Route path='/menu' element={<Menu />} />
+                  <Route path='/' element={<DashboardSupplier />} />
+                  <Route path='/persediaansupplier' element={<PersediaanSupplier />} />
+                  <Route path='/pesananmasuk' element={<Pesananmasuk />} />
 
                   </>
 

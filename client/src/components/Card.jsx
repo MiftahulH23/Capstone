@@ -42,7 +42,7 @@ export const ScoreCard = ({ judul, ket, icon, subjudul, desc }) => {
         <p className="text-xs text-slate-400">{ket}</p>
       </div>
       <div className="grid grid-cols-3 px-2 py-5 place-items-center">
-        <div className="stroke-hijau">{icon}</div>
+        <div className="fill-hijau">{icon}</div>
         <div className="col-span-2 flex flex-col gap-2">
           <p className="font-bold">{subjudul}</p>
           <p className="text-sm">{desc}</p>
@@ -53,7 +53,11 @@ export const ScoreCard = ({ judul, ket, icon, subjudul, desc }) => {
 };
 
 export const GrafikCard = () => {
-  return <div className="bg-white aspect-[6/2] rounded-lg"></div>;
+  return (
+    <div className="bg-white aspect-[6/2] rounded-lg">
+      <p className="p-10">Grafik Penjualan</p>
+    </div>
+  );
 };
 
 export const PesananCard = () => {
@@ -132,19 +136,68 @@ export const PesananCard = () => {
   );
 };
 
-export const PersediaanAdmin = () => {
+export const CardProduct = () => {
+  const data = [];
   return (
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
         <p className="">Daftar Product</p>
         <button className="bg-hijau rounded-lg px-4 py-2">Input Product</button>
       </div>
-      <div className="bg-white aspect-[4/1]"></div>
+      <div className="bg-white aspect-[4/1] px-10 py-3">
+        <table className="table-auto w-full">
+          <thead>
+            <tr>
+              <th>Nama Produk</th>
+              <th>Jumlah (Rp)</th>
+              <th>Keterangan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((item) => (
+              <tr>
+                <td>{item.name ?? "-"}</td>
+                <td>{item.price ?? "-"}</td>
+                <td>{item.amount ?? 0}</td>
+              </tr>
+            )) ?? <tr>Produk Tidak tersedia</tr>}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export const CardBahanBaku = () => {
+  const data = [];
+  return (
+    <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
         <p className="">Daftar Product</p>
         <button className="bg-hijau rounded-lg px-4 py-2">Input Product</button>
       </div>
-      <div className="bg-white aspect-[4/1] mb-10"></div>
+      <div className="bg-white aspect-[4/1] px-10 py-3">
+        <table className="table-auto w-full">
+          <thead>
+            <tr>
+              <th>Nama Bahan Baku</th>
+              <th>Jumlah (Rp)</th>
+              <th>Keterangan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((item) => (
+              <tr>
+                <td>{item.name ?? "-"}</td>
+                <td>{item.price ?? "-"}</td>
+                <td>{item.amount ?? 0}</td>
+              </tr>
+            )) ?? <tr>Produk Tidak tersedia</tr>}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
