@@ -18,7 +18,7 @@ function App() {
   const [login, setLogin] = useState(false)
   const handleLogin = () => setLogin(!login)
 
-  const [user, setUser] = useState("admin");
+  const [user, setUser] = useState("customer");
 
   return (
     <Router>
@@ -35,13 +35,27 @@ function App() {
             <div className="flex-auto h-screen overflow-y-scroll ">
               <Header />
               <Routes>
-                <Route path='/' element={<Beranda />} />
-                <Route path='/menu' element={<Menu />} />
-                <Route path='/pesanan' element={<PesananSaya />} />
-                <Route path='/tentang' element={<TentangKami />} />
-                <Route path='/persediaan' element={<Persediaan />} />
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path='/inputpesanan' element={<InputPesanan />} />
+                {user === "admin"? (
+                  <>
+                  <Route path='/dashboard' element={<Dashboard />} />
+                  <Route path='/persediaan' element={<Persediaan />} />
+                  <Route path='/inputpesanan' element={<InputPesanan />} />
+                  </>
+                ):user === "supplier"? (
+                  <>
+                  <Route path='/' element={<Beranda />} />
+                  <Route path='/menu' element={<Menu />} />
+
+                  </>
+
+                ):(
+                  <>
+                  <Route path='/' element={<Beranda />} />
+                  <Route path='/menu' element={<Menu />} />
+                  <Route path='/pesanan' element={<PesananSaya />} />
+                  <Route path='/tentang' element={<TentangKami />} />
+                  </>
+                )}
               </Routes>
               {/* <button onClick={handleLogin}>login</button> */}
             </div>
