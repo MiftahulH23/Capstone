@@ -48,8 +48,8 @@ recordRoutes.route("/produk/add").post(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myObj = {
     nama: req.body.nama,
-    jumlah: req.body.jumlah,
-    noPesanan: req.body.noPesanan,
+    stok: req.body.stok,
+    harga: req.body.harga,
   };
   db_connect
     .collection("produk")
@@ -72,9 +72,9 @@ recordRoutes.route("/produk/update/:id").put(function (req, res) {
   let myquery = { _id: new ObjectId(req.params.id) };
   let newValues = {
     $set: {
-        nama: req.body.nama,
-        jumlah: req.body.jumlah,
-        noPesanan: req.body.noPesanan,
+      nama: req.body.nama,
+      stok: req.body.stok,
+      harga: req.body.harga
     },
   };
   db_connect

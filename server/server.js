@@ -19,13 +19,12 @@ app.listen(port, () => {
 
 // get routes
 const user = require("./routes/user");
-const cashier = require("./routes/kasir");
+const kasir = require("./routes/kasir");
 const supplier = require("./routes/supplier");
-const customer = require("./routes/pelanggan");
-const product = require("./routes/produk.js");
-const material = require("./routes/bahanbaku");
-const productsOrders = require("./routes/productsOrders");
-const materialsOrders = require("./routes/materialsOrders");
+const pelanggan = require("./routes/pelanggan");
+const produk = require("./routes/produk");
+const bahanbaku = require("./routes/bahanbaku");
+
 
 // use routes
-app.use([user, cashier, supplier, customer, product, material, productsOrders, materialsOrders]);
+app.use([user, kasir, supplier, pelanggan, produk, bahanbaku]);

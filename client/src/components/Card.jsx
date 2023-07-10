@@ -1,5 +1,7 @@
-import React, { isValidElement } from "react";
-
+import React, { isValidElement, useState, useEffect } from "react";
+import { GetData } from "./Api";
+import axios from "axios";
+import { Link } from 'react-router-dom'
 export const PembayaranCard = () => {
   return (
     <div className="grid place-items-center">
@@ -137,29 +139,35 @@ export const PesananCard = () => {
 };
 
 export const CardProduct = () => {
-  const data = [];
+  const Produk = () => {
+    const { users } = GetData("http://localhost:5000/produk");
+    console.log(users);
+    return users;
+  };
+  const dataproduk = Produk();
   return (
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
         <p className="">Daftar Product</p>
-        <button className="bg-hijau rounded-lg px-4 py-2">Input Product</button>
+        <Link className="bg-hijau rounded-lg px-4 py-2" to="/inputproduk">Input Product</Link>
       </div>
       <div className="bg-white aspect-[4/1] px-10 py-3">
-        <table className="table-auto w-full">
+        <table className="">
           <thead>
             <tr>
               <th>Nama Produk</th>
-              <th>Jumlah (Rp)</th>
-              <th>Keterangan</th>
+              <th>Stock</th>
+              <th>Harga</th>
               <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {data?.map((item) => (
+            {dataproduk?.data.map((item) => (
               <tr>
-                <td>{item.name ?? "-"}</td>
-                <td>{item.price ?? "-"}</td>
-                <td>{item.amount ?? 0}</td>
+                <td>{item.nama ?? "-"}</td>
+                <td>{item.stok ?? "-"}</td>
+                <td>{item.harga ?? 0}</td>
+                <td></td>
               </tr>
             )) ?? <tr>Produk Tidak tersedia</tr>}
           </tbody>
