@@ -48,6 +48,7 @@ recordRoutes.route("/bahanbaku/add").post(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myObj = {
     nama: req.body.nama,
+    stok: req.body.stok
   };
   db_connect
     .collection("bahanbaku")
@@ -71,6 +72,7 @@ recordRoutes.route("/bahanbaku/update/:id").put(function (req, res) {
   let newValues = {
     $set: {
       nama: req.body.nama,
+      stok: req.body.stok,
     },
   };
   db_connect

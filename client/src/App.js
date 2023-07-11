@@ -18,18 +18,19 @@ import Pesananmasuk from './pages/Pesananmasuk';
 import Product from './pages/Product';
 import Bahanbaku from './pages/Bahanbaku';
 import Inputproduk from './pages/Inputproduk';
+import Inputbahanbaku from './pages/Inputbahanbaku';
 
 
 function App() {
-  const [login, setLogin] = useState(false)
-  const handleLogin = () => setLogin(!login)
+  const [login, setLogin] = useState(true)
+  const handleLogin = () => setLogin(login)
 
   const [user, setUser] = useState("admin");
 
   return (
     <Router>
-      <div className={`w-full h-screen  bg-background ${login? 'grid place-items-center' : 'flex'}`}>
-        {login ? (
+      <div className={`w-full h-screen  bg-background ${!login? 'grid place-items-center' : 'flex'}`}>
+        {!login ? (
           <Routes>
             <Route path='/' element={<Login />} />
           </Routes>
@@ -48,6 +49,7 @@ function App() {
                   <Route path='/bahanbaku' element={<Bahanbaku />} />
                   <Route path='/inputpesanan' element={<InputPesanan />} />
                   <Route path='/inputproduk' element={<Inputproduk />} />
+                  <Route path='/inputbahanbaku' element={<Inputbahanbaku />} />
                   </>
                 ):user === "supplier"? (
                   <>

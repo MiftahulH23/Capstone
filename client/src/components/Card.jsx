@@ -148,10 +148,10 @@ export const CardProduct = () => {
   return (
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
-        <p className="">Daftar Product</p>
-        <Link className="bg-hijau rounded-lg px-4 py-2" to="/inputproduk">Input Product</Link>
+        <p className="text-xl text-hijau font-bold">Daftar Product</p>
+        <Link className="bg-hijau rounded-lg px-4 py-2" to="/inputproduk">Tambah Product</Link>
       </div>
-      <div className="bg-white aspect-[4/1] px-10 py-3">
+      <div className="bg-white aspect-[4/1] px-10 py-10">
         <table className="">
           <thead>
             <tr>
@@ -178,29 +178,33 @@ export const CardProduct = () => {
 };
 
 export const CardBahanBaku = () => {
-  const data = [];
+  const Bahanbaku = () => {
+    const { users } = GetData("http://localhost:5000/bahanbaku");
+    console.log(users);
+    return users;
+  };
+  const databahanbaku = Bahanbaku();
   return (
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
-        <p className="">Daftar Product</p>
-        <button className="bg-hijau rounded-lg px-4 py-2">Input Product</button>
+        <p className="text-xl text-hijau font-bold">Daftar Bahan Baku</p>
+        <Link className="bg-hijau rounded-lg px-4 py-2" to={"/inputbahanbaku"}>Tambah Bahan Baku</Link>
       </div>
-      <div className="bg-white aspect-[4/1] px-10 py-3">
+      <div className="bg-white aspect-[4/1] px-10 py-10">
         <table className="table-auto w-full">
           <thead>
             <tr>
               <th>Nama Bahan Baku</th>
-              <th>Jumlah (Rp)</th>
-              <th>Keterangan</th>
+              <th>Stock</th>
               <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {data?.map((item) => (
+            {databahanbaku?.data.map((item) => (
               <tr>
-                <td>{item.name ?? "-"}</td>
-                <td>{item.price ?? "-"}</td>
-                <td>{item.amount ?? 0}</td>
+                <td>{item.nama ?? "-"}</td>
+                <td>{item.stok ?? "-"}</td>
+                <td></td>
               </tr>
             )) ?? <tr>Produk Tidak tersedia</tr>}
           </tbody>
