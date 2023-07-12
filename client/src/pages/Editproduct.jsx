@@ -10,26 +10,29 @@ const Products = () => {
 };
 
 const Editproduk = () => {
-    const dataProducts = Products();
-    const handleSubmit = (event) => {
-      event.preventDefault();
-  
-      const id = event.target.produk.value;
-      const product = dataProducts?.data.find((item) => item._id === id);
-      axios
-        .put(`http://localhost:5000/produk/update/${id}`, {
-          nama: event.target.nama,
-          stok: event.target.stok,
-          harga: event.target.harga,
-        })
-        .then((res) => {
-          console.log(res);
-          event.target.reset();
-        })
-        .catch((err) => {
-          console.error(err);
-        })
+  const dataProducts = Products();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = {
+      nama: event.target.nama.value,
+      stok: event.target.stok.value,
+      harga: parseInt(event.target.harga.value),
     };
+
+    const product = dataProducts?.data?.find((item) => item.nama === data.nama);
+
+    axios
+      .put(`http://localhost:5000/produk/update/${product._id}`, data)
+      .then((res) => {
+        console.log(res);
+        event.target.reset();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <div className="p-8">
       <div className="bg-white aspect-[4/2] rounded-lg">
