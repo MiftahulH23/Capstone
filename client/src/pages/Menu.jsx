@@ -1,6 +1,10 @@
 import React from "react";
 import Nusantara from "../assets/img/nusantara.png";
-import Avocado from "../assets/img/avocado.png";
+import Avocado from "../assets/img/estehavocado.jpg";
+import Lemon from "../assets/img/estehlemon.jpg";
+import Mango from "../assets/img/estehmango.jpg";
+import Velvet from "../assets/img/estehredvelvet.jpg";
+import Taro from "../assets/img/estehtaro.jpg";
 
 const CardMenu = (props) => {
   return (
@@ -9,25 +13,12 @@ const CardMenu = (props) => {
         <img src={props.img} alt="" className="w-full h-full object-contain" />
       </div>
       <div className="flex justify-between px-5 mt-3 w-full">
-        <div>
+        <div className="mb-3">
           <p className="">{props.produk}</p>
           <p>{props.stock}</p>
           <p>{props.harga}</p>
         </div>
-        <div className="mt-2 flex flex-col items-end">
-          <div className="flex gap-2 items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="currentColor"
-              class="bi bi-star-fill fill-gold"
-              viewBox="0 0 16 16"
-            >
-              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-            </svg>
-            <p>4.9</p>
-          </div>
+        <div className="mt-2 flex justify-end items-end mb-5">
           <div className="mt-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -52,12 +43,12 @@ const Menu = () => {
     <>
       <h1 className="text-2xl font-bold ml-10 mt-8">Menu</h1>
       <div className="grid grid-cols-3 gap-5 place-items-center mx-10 mt-10">
-        <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
-        <CardMenu img={Avocado} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
-        <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
-        <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
-        <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
-        <CardMenu img={Nusantara} produk="Es Teh Nusantara" stock="Stock 15" harga="15K" />
+        <CardMenu img={Nusantara} produk="Esteh Nusantara" stock="Stock 15" harga="15K" />
+        <CardMenu img={Avocado} produk="Esteh Avocado" stock="Stock 15" harga="15K" />
+        <CardMenu img={Lemon} produk="Esteh Lemon" stock="Stock 15" harga="15K" />
+        <CardMenu img={Mango} produk="Esteh Mango" stock="Stock 15" harga="15K" />
+        <CardMenu img={Velvet} produk="Esteh Red Velvet" stock="Stock 15" harga="15K" />
+        <CardMenu img={Taro} produk="Esteh Taro" stock="Stock 15" harga="15K" />
       </div>
     </>
   );
