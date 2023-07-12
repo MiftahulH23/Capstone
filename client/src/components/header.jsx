@@ -1,6 +1,6 @@
 import User from '../assets/img/user.png'
 
-const Header = () => {
+const Header = ({ user }) => {
   return (
     <div className="flex justify-between mt-5 mr-10 ml-10">
       <div className="flex bg-white  w-[50%] items-center py-1 rounded-lg">
@@ -21,7 +21,7 @@ const Header = () => {
         <input type="text" placeholder="Cari" className=" ml-3" />
       </div>
       <div className="flex gap-2 px-2 items-center">
-        <p className='font-bold'>Miftahul Huda</p>
+        <p className='font-bold'>{user.name}</p>
         <div>
           <img src={User} alt="" />
         </div>
