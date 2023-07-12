@@ -36,7 +36,7 @@ const Navbar = ({ user }) => {
     <div className="flex-none flex flex-col items-center w-[15%] h-screen px-5 bg-white py-20">
       <img src={Logo} alt="" className="w-[100%]" />
       <ul className="flex flex-col gap-3 mt-20">
-        {Menu[user].map(([name, path], i) => (
+        {Menu[user.role].map(([name, path], i) => (
           <li key={i}>
             <NavLink
               to={path}
@@ -45,7 +45,7 @@ const Navbar = ({ user }) => {
               }
             >
               <div className="flex gap-3 items-center">
-                {user === "admin"
+                {user.role === "admin"
                   ? (() => {
                       switch (name) {
                         case "Dashboard":
@@ -76,6 +76,8 @@ const Navbar = ({ user }) => {
                           return <PersediaanIcon />;
                         case "Pesanan Masuk":
                           return <Order />;
+                        default:
+                          return null;
                       }
                     })()}
                 <span>{name}</span>

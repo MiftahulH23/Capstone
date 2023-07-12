@@ -62,7 +62,7 @@ function App() {
             <div className="flex-auto h-screen overflow-y-scroll ">
               <Header />
               <Routes>
-                {user === "admin" ? (
+                {user.role === "admin" ? (
                   <>
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/product" element={<Product />} />
@@ -74,7 +74,7 @@ function App() {
                       element={<Inputbahanbaku />}
                     />
                   </>
-                ) : user === "supplier" ? (
+                ) : user.role === "supplier" ? (
                   <>
                     <Route path="/" element={<DashboardSupplier />} />
                     <Route
