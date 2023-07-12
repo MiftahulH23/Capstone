@@ -86,6 +86,9 @@ const Navbar = ({ user }) => {
           </li>
         ))}
       </ul>
+      <div className="mt-auto">
+        <button>Log out</button>
+      </div>
     </div>
   );
 };
