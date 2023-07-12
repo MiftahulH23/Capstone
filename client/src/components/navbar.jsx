@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Logo from "../assets/img/logo.png";
 import {
@@ -11,7 +11,10 @@ import {
   InputPesanan,
   Order,
 } from "./Svg";
-const Navbar = ({ user }) => {
+
+const Navbar = ({ user, handleLogin, handleUser }) => {
+  const navigate = useNavigate()
+
   const Menu = {
     customer: [
       ["Beranda", "/"],
@@ -31,6 +34,12 @@ const Navbar = ({ user }) => {
       ["Pesanan Masuk", "/pesananmasuk"],
     ],
   };
+
+  const handleLogout = () => {
+    handleLogin();
+    handleUser("", "", "");
+    navigate("/");
+  }
 
   return (
     <div className="flex-none flex flex-col items-center w-[15%] h-screen px-5 bg-white py-20">
@@ -86,7 +95,7 @@ const Navbar = ({ user }) => {
           </li>
         ))}
       </ul>
-      <div className="mt-auto">
+      <div onClick={handleLogout} className="mt-auto">
         <button>Log out</button>
       </div>
     </div>

@@ -57,7 +57,7 @@ function App() {
         ) : (
           <>
             {/* kiri */}
-            <Navbar user={user} />
+            <Navbar user={user} handleLogin={handleLogin} handleUser={handleUser} />
             {/* kanan */}
             <div className="flex-auto h-screen overflow-y-scroll ">
               <Header />
