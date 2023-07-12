@@ -65,7 +65,7 @@ function App() {
             />
             {/* kanan */}
             <div className="flex-auto h-screen overflow-y-scroll ">
-              <Header />
+              <Header user={user} />
               <Routes>
                 {user.role === "admin" ? (
                   <>
