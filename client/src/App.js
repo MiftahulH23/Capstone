@@ -20,6 +20,7 @@ import Inputproduk from "./pages/Inputproduk";
 import Inputbahanbaku from "./pages/Inputbahanbaku";
 import Inputbahanbakusupplier from "./pages/Inputbahanbakusupplier";
 import Register from "./pages/register";
+import Editproduct from "./pages/Editproduct";
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -73,6 +74,7 @@ function App() {
                     <Route path="/bahanbaku" element={<Bahanbaku />} />
                     <Route path="/inputpesanan" element={<InputPesanan />} />
                     <Route path="/inputproduk" element={<Inputproduk />} />
+                    <Route path="/editproduct" element={<Editproduct />} />
                     <Route
                       path="/inputbahanbaku"
                       element={<Inputbahanbaku />}

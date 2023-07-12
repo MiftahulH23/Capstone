@@ -1,7 +1,7 @@
 import React, { isValidElement, useState, useEffect } from "react";
 import { GetData } from "./Api";
 import axios from "axios";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 export const PembayaranCard = () => {
   return (
     <div className="grid place-items-center">
@@ -149,7 +149,9 @@ export const CardProduct = () => {
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
         <p className="text-xl text-hijau font-bold">Daftar Product</p>
-        <Link className="bg-hijau rounded-lg px-4 py-2" to="/inputproduk">Tambah Product</Link>
+        <Link className="bg-hijau rounded-lg px-4 py-2" to="/inputproduk">
+          Tambah Product
+        </Link>
       </div>
       <div className="bg-white aspect-[4/1] px-10 py-10">
         <table className="">
@@ -167,7 +169,20 @@ export const CardProduct = () => {
                 <td>{item.nama ?? "-"}</td>
                 <td>{item.stok ?? "-"}</td>
                 <td>{item.harga ?? 0}</td>
-                <td></td>
+                <td>
+                  <Link to={"/editproduct"}> 
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-pen"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                    </svg>
+                  </Link>
+                </td>
               </tr>
             )) ?? <tr>Produk Tidak tersedia</tr>}
           </tbody>
@@ -188,7 +203,9 @@ export const CardBahanBaku = () => {
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
         <p className="text-xl text-hijau font-bold">Daftar Bahan Baku</p>
-        <Link className="bg-hijau rounded-lg px-4 py-2" to={"/inputbahanbaku"}>Tambah Bahan Baku</Link>
+        <Link className="bg-hijau rounded-lg px-4 py-2" to={"/inputbahanbaku"}>
+          Tambah Bahan Baku
+        </Link>
       </div>
       <div className="bg-white aspect-[4/1] px-10 py-10">
         <table className="table-auto w-full">
@@ -225,7 +242,12 @@ export const CardBahanBakuSupplier = () => {
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
         <p className="text-xl text-hijau font-bold">Daftar Bahan Baku</p>
-        <Link className="bg-hijau rounded-lg px-4 py-2" to={"/inputbahanbakusupplier"}>Tambah Bahan Baku</Link>
+        <Link
+          className="bg-hijau rounded-lg px-4 py-2"
+          to={"/inputbahanbakusupplier"}
+        >
+          Tambah Bahan Baku
+        </Link>
       </div>
       <div className="bg-white aspect-[4/1] px-10 py-10">
         <table className="table-auto w-full">
