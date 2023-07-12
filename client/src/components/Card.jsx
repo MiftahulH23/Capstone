@@ -213,3 +213,40 @@ export const CardBahanBaku = () => {
     </div>
   );
 };
+
+export const CardBahanBakuSupplier = () => {
+  const Bahanbaku = () => {
+    const { users } = GetData("http://localhost:5000/bahanbakusupplier");
+    console.log(users);
+    return users;
+  };
+  const databahanbaku = Bahanbaku();
+  return (
+    <div>
+      <div className=" flex justify-between py-4 mt-10 items-center">
+        <p className="text-xl text-hijau font-bold">Daftar Bahan Baku</p>
+        <Link className="bg-hijau rounded-lg px-4 py-2" to={"/inputbahanbakusupplier"}>Tambah Bahan Baku</Link>
+      </div>
+      <div className="bg-white aspect-[4/1] px-10 py-10">
+        <table className="table-auto w-full">
+          <thead>
+            <tr>
+              <th>Nama Bahan Baku</th>
+              <th>Stock</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {databahanbaku?.data.map((item) => (
+              <tr>
+                <td>{item.nama ?? "-"}</td>
+                <td>{item.stok ?? "-"}</td>
+                <td></td>
+              </tr>
+            )) ?? <tr>Produk Tidak tersedia</tr>}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};

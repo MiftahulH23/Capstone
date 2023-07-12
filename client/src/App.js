@@ -19,13 +19,14 @@ import Product from './pages/Product';
 import Bahanbaku from './pages/Bahanbaku';
 import Inputproduk from './pages/Inputproduk';
 import Inputbahanbaku from './pages/Inputbahanbaku';
+import Inputbahanbakusupplier from './pages/Inputbahanbakusupplier';
 
 
 function App() {
   const [login, setLogin] = useState(true)
   const handleLogin = () => setLogin(login)
 
-  const [user, setUser] = useState("supplier");
+  const [user, setUser] = useState("admin");
 
   return (
     <Router>
@@ -55,6 +56,7 @@ function App() {
                   <>
                   <Route path='/' element={<DashboardSupplier />} />
                   <Route path='/persediaansupplier' element={<PersediaanSupplier />} />
+                  <Route path='/inputbahanbakusupplier' element={<Inputbahanbakusupplier />} />
                   <Route path='/pesananmasuk' element={<Pesananmasuk />} />
 
                   </>
