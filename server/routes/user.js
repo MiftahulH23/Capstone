@@ -16,7 +16,7 @@ recordRoutes.route("/user").get(function (req, res) {
       res.json(result);
     })
     .then((data) => {
-      console.log('user berhasil ditampilkan')
+      console.log("user berhasil ditampilkan");
       res.json({
         message: "user berhasil ditampilkan",
         data: data,
@@ -35,7 +35,7 @@ recordRoutes.route("/user/:id").get(function (req, res) {
       res.json(result);
     })
     .then((data) => {
-      console.log('user berhasil ditampilkan')
+      console.log("user berhasil ditampilkan");
       res.json({
         message: "user berhasil ditampilkan",
         data: data,
@@ -47,6 +47,7 @@ recordRoutes.route("/user/:id").get(function (req, res) {
 recordRoutes.route("/user/add").post(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myObj = {
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password,
     role: req.body.role,
@@ -58,7 +59,7 @@ recordRoutes.route("/user/add").post(function (req, res) {
       res.json(result);
     })
     .then(() => {
-      console.log('user berhasil ditambahkan')
+      console.log("user berhasil ditambahkan");
       res.json({
         message: "user berhasil ditambahkan",
         data: myObj,
@@ -72,6 +73,7 @@ recordRoutes.route("/user/update/:id").put(function (req, res) {
   let myquery = { _id: new ObjectId(req.params.id) };
   let newValues = {
     $set: {
+      username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       role: req.body.role,

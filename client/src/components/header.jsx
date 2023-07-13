@@ -1,4 +1,4 @@
-import User from '../assets/img/user.png'
+import User from "../assets/img/user.png";
 
 const Header = ({ user }) => {
   return (
@@ -21,7 +21,10 @@ const Header = ({ user }) => {
         <input type="text" placeholder="Cari" className=" ml-3" />
       </div>
       <div className="flex gap-2 px-2 items-center">
-        <p className='font-bold'>{user.name}</p>
+        <div className="">
+          <p className="font-bold">{user.name}</p>
+          <p className="text-sm font-medium">{user.role}</p>
+        </div>
         <div>
           <img src={User} alt="" />
         </div>
