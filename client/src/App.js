@@ -23,6 +23,7 @@ import Register from "./pages/register";
 import Editproduct from "./pages/Editproduct";
 import Editbahanbaku from "./pages/Editbahanbaku";
 import Pesanbahanbaku from "./pages/Pesanbahanbaku";
+import Pengirimanbahanbaku from "./pages/Pengirimanbahanbaku";
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -96,6 +97,7 @@ function App() {
                       element={<Inputbahanbakusupplier />}
                     />
                     <Route path="/pesananmasuk" element={<Pesananmasuk />} />
+                    <Route path="/pengirimanbahanbaku" element={<Pengirimanbahanbaku />} />
                   </>
                 ) : (
                   <>
