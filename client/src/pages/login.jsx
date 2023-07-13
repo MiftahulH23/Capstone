@@ -28,7 +28,8 @@ const Login = ({ handleLogin, handleUser }) => {
         (item) => item.email === data.email && item.password === data.password
       );
       handleLogin();
-      handleUser(user._id, user.name, user.role);
+      handleUser(user._id, user.username, user.role);
+      console.log(user._id, user.username, user.role);
       console.log("login success");
       setTimeout(() => {
         navigate("/");
