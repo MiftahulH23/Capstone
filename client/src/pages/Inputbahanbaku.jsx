@@ -7,8 +7,8 @@ const Inputbahanbaku = () => {
       event.preventDefault();
       const data = {
         nama: event.target.nama.value,
-        stok: event.target.stok.value,
-        minimum: event.target.minimum.value
+        stok: parseInt(event.target.stok.value),
+        minimum: parseInt(event.target.minimum.value)
       };
       axios
         .post("http://127.0.0.1:5000/bahanbaku/add", data)
