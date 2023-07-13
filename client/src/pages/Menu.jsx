@@ -5,6 +5,7 @@ import Lemon from "../assets/img/estehlemon.jpg";
 import Mango from "../assets/img/estehmango.jpg";
 import Velvet from "../assets/img/estehredvelvet.jpg";
 import Taro from "../assets/img/estehtaro.jpg";
+import { Link } from "react-router-dom";
 
 const CardMenu = (props) => {
   return (
@@ -35,7 +36,7 @@ const CardMenu = (props) => {
         </div>
       </div>
     </div>
-);
+  );
 };
 
 const Menu = () => {
@@ -43,11 +44,38 @@ const Menu = () => {
     <>
       <h1 className="text-2xl font-bold ml-10 mt-8">Menu</h1>
       <div className="grid grid-cols-3 gap-5 place-items-center mx-10 mt-10">
-        <CardMenu img={Nusantara} produk="Esteh Nusantara" stock="Stock 15" harga="15K" />
-        <CardMenu img={Avocado} produk="Esteh Avocado" stock="Stock 15" harga="15K" />
-        <CardMenu img={Lemon} produk="Esteh Lemon" stock="Stock 15" harga="15K" />
-        <CardMenu img={Mango} produk="Esteh Mango" stock="Stock 15" harga="15K" />
-        <CardMenu img={Velvet} produk="Esteh Red Velvet" stock="Stock 15" harga="15K" />
+        <Link to="/pesanan">
+          <CardMenu
+            img={Nusantara}
+            produk="Esteh Nusantara"
+            stock="Stock 15"
+            harga="15K"
+          />
+        </Link>
+        <CardMenu
+          img={Avocado}
+          produk="Esteh Avocado"
+          stock="Stock 15"
+          harga="15K"
+        />
+        <CardMenu
+          img={Lemon}
+          produk="Esteh Lemon"
+          stock="Stock 15"
+          harga="15K"
+        />
+        <CardMenu
+          img={Mango}
+          produk="Esteh Mango"
+          stock="Stock 15"
+          harga="15K"
+        />
+        <CardMenu
+          img={Velvet}
+          produk="Esteh Red Velvet"
+          stock="Stock 15"
+          harga="15K"
+        />
         <CardMenu img={Taro} produk="Esteh Taro" stock="Stock 15" harga="15K" />
       </div>
     </>

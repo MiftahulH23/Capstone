@@ -16,7 +16,7 @@ recordRoutes.route("/penjualan").get(function (req, res) {
       res.json(result);
     })
     .then((data) => {
-      console.log('penjualan berhasil ditampilkan')
+      console.log("penjualan berhasil ditampilkan");
       res.json({
         message: "penjualan berhasil ditampilkan",
         data: data,
@@ -35,7 +35,7 @@ recordRoutes.route("/penjualan/:id").get(function (req, res) {
       res.json(result);
     })
     .then((data) => {
-      console.log('penjualan berhasil ditampilkan')
+      console.log("penjualan berhasil ditampilkan");
       res.json({
         message: "penjualan berhasil ditampilkan",
         data: data,
@@ -52,8 +52,6 @@ recordRoutes.route("/penjualan/add").post(function (req, res) {
     jumlah: req.body.jumlah,
     harga: req.body.harga,
     namakasir: req.body.namakasir,
-    metodepembayaran: req.body.metodepembayaran,
-    jenispesanan: req.body.jenispesanan,
     tanggalwaktu: req.body.tanggalwaktu,
     total: req.body.total,
   };
@@ -64,7 +62,7 @@ recordRoutes.route("/penjualan/add").post(function (req, res) {
       res.json(result);
     })
     .then(() => {
-      console.log('penjualan berhasil ditambahkan')
+      console.log("penjualan berhasil ditambahkan");
       res.json({
         message: "penjualan berhasil ditambahkan",
         data: myObj,
@@ -83,8 +81,6 @@ recordRoutes.route("/penjualan/update/:id").put(function (req, res) {
       jumlah: req.body.jumlah,
       harga: req.body.harga,
       namakasir: req.body.namakasir,
-      metodepembayaran: req.body.metodepembayaran,
-      jenispesanan: req.body.jenispesanan,
       tanggalwaktu: req.body.tanggalwaktu,
       total: req.body.total,
     },

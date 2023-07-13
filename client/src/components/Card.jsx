@@ -4,36 +4,68 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { currentDatetime } from "./format";
 
-export const PembayaranCard = () => {
+export const PembayaranCard = ({ count }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      namacustomer: e.target.nama.value,
+      jumlah: e.target.jumlah.value,
+      menu: "Esteh Susu Nusantara",
+      harga: 15000,
+      metodepembayaran: e.target.pembayaran.value,
+      total: count,
+      tanggalwaktu: currentDatetime(),
+    };
+    axios
+      .post("http://localhost:5000/penjualan/add", data)
+      .then((res) => {
+        console.log(res.data);
+        alert("Pesanan berhasil ditambahkan");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Pesanan gagal");
+      })
+  }
+  
   return (
     <div className="grid place-items-center">
-      <div className="flex flex-col w-[70%]">
+      <form onSubmit={handleSubmit} className="flex flex-col w-[70%]">
+        <label htmlFor="">Nama</label>
         <input
           type="text"
-          className="border-2 w-full px-4 py-1 rounded-lg"
-          placeholder="Alamat"
+          name="nama"
+          className="border-2 w-full px-4 mb-4 rounded-lg"
+          placeholder="Input nama"
         />
+        <label htmlFor="">Jumlah Pesanan</label>
         <input
           type="text"
-          className="border-2 w-full px-4 py-1 rounded-lg mt-5"
-          placeholder="No Hp"
+          name="jumlah"
+          value={count}
+          className="border-2 w-full px-4 mb-4 rounded-lg"
+          placeholder="Jumlah"
         />
+        <label htmlFor="">Alamat</label>
         <input
           type="text"
-          className="border-2 w-full px-4 py-1 rounded-lg mt-5"
-          placeholder="Pesan(Opsional)"
+          name="alamat"
+          className="border-2 w-full px-4 mb-4 rounded-lg"
+          placeholder="Jumlah"
         />
-        <p className="mt-10">Metode Pembayaran</p>
-        <div className="w-full border-2 px-4 py-1 rounded-lg mt-5">
-          <p>Bayar di temmpat</p>
-        </div>
-        <button
-          onClick={() => alert("Pesanan diproses")}
-          className="w-full px-4 py-1 rounded-lg mt-5 bg-hijau"
+        <label htmlFor="">Pembayaran</label>
+        <select
+          name="pembayaran"
+          id="pembayaran"
+          className="border-2 w-full px-4 mb-4 rounded-lg"
         >
+          <option value="cash">Cash</option>
+          <option value="credit">Credit Card</option>
+        </select>
+        <button type="submit" className="w-full px-4 mb-4 rounded-lg bg-hijau">
           Bayar
         </button>
-      </div>
+      </form>
     </div>
   );
 };
@@ -77,7 +109,7 @@ export const PesananCard = () => {
   };
   const dataProduk = Produk();
   const dataBahanbaku = Bahan();
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -91,15 +123,15 @@ export const PesananCard = () => {
       jenispesanan: event.target.jenispesanan.value,
       tanggalwaktu: currentDatetime(),
       total: event.target.totalharga.value,
-    }
+    };
 
-    const product = dataProduk?.data.find((item) => item.nama === data.menu)
+    const product = dataProduk?.data.find((item) => item.nama === data.menu);
 
     axios
       .post(`http://127.0.0.1:5000/penjualan/add`, data)
       .then((res) => {
         console.log(res);
-        console.log({product})
+        console.log({ product });
 
         product.komposisi?.map((el) => {
           dataBahanbaku?.data?.map((item) => {
@@ -108,7 +140,9 @@ export const PesananCard = () => {
                 .put(`http://localhost:5000/bahanbaku/update/${item._id}`, {
                   nama: item.nama,
                   minimum: item.minimum,
-                  stok: parseInt(item.stok) - parseInt(el[1]) * parseInt(data.jumlah),
+                  stok:
+                    parseInt(item.stok) -
+                    parseInt(el[1]) * parseInt(data.jumlah),
                 })
                 .then((res) => {
                   console.log(res);
@@ -129,17 +163,20 @@ export const PesananCard = () => {
       .catch((err) => {
         console.error(err);
         alert("Gagal");
-      })
+      });
   };
 
-  const [jumlah, setJumlah] = React.useState(0)
-  const [harga, setHarga] = React.useState(0)
-  const total = parseInt(jumlah) * parseInt(harga)
+  const [jumlah, setJumlah] = React.useState(0);
+  const [harga, setHarga] = React.useState(0);
+  const total = parseInt(jumlah) * parseInt(harga);
 
   return (
     <div className="bg-white aspect-[4/2]">
       <p className="px-4 py-2">Input Pesanan</p>
-      <form onSubmit={handleSubmit} className="grid grid-cols-2 px-4 py-2 gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-2 px-4 py-2 gap-4"
+      >
         <div className="w-full flex flex-col gap-2 ">
           <input
             type="text"
@@ -165,7 +202,7 @@ export const PesananCard = () => {
             name="jumlah"
             id="jumlah"
             onChange={(e) => setJumlah(e.target.value)}
-            />
+          />
           <input
             type="text"
             className="px-4 py-2 border-2 w-full rounded-lg"
@@ -222,7 +259,10 @@ export const PesananCard = () => {
           />
         </div>
         <div className="flex justify-end px-4 py-4">
-          <button className="px-6 py-2 bg-hijau text-white rounded-lg" type="submit">
+          <button
+            className="px-6 py-2 bg-hijau text-white rounded-lg"
+            type="submit"
+          >
             Input Pesanan
           </button>
         </div>
@@ -292,7 +332,7 @@ export const CardBahanBaku = () => {
     console.log(users);
     return users;
   };
-  const databahanbaku = Bahanbaku()
+  const databahanbaku = Bahanbaku();
 
   return (
     <div>
@@ -367,7 +407,9 @@ export const CardPesananBahanBaku = () => {
     return users;
   };
   const datapesananbahanbaku = Bahanbaku();
-  const dataPesanan = datapesananbahanbaku?.data?.filter(item => item.status !== 'diterima')
+  const dataPesanan = datapesananbahanbaku?.data?.filter(
+    (item) => item.status !== "diterima"
+  );
 
   return (
     <div>

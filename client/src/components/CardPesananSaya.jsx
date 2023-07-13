@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Nusantara from "../assets/img/nusantara.png";
-const CardPesananSaya = ({ produk, harga }) => {
-  const [jumlah, setJumlah] = useState(1);
+
+const CardPesananSaya = ({ produk, harga, count, setCount }) => {
   return (
     <div className="mt-10">
       <div className="flex justify-center items-center mt-10">
@@ -13,7 +13,9 @@ const CardPesananSaya = ({ produk, harga }) => {
           <p>{harga}</p>
           <div className="flex justify-center gap-4">
             {/* Tombol Kurang */}
-            <button onClick={() => setJumlah((prev) => prev - 1)}>
+            <button
+              onClick={setCount}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -25,9 +27,9 @@ const CardPesananSaya = ({ produk, harga }) => {
                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
               </svg>
             </button>
-            <p>{jumlah}</p>
+            <p>{count}</p>
             {/* Tombol Tambah */}
-            <button onClick={() => setJumlah((prev) => prev + 1)}>
+            <button onClick={setCount}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
