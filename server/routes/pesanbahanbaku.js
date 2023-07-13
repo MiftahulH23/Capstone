@@ -6,10 +6,10 @@ const ObjectId = require("mongodb").ObjectId;
 recordRoutes.use(express.urlencoded({ extended: true }));
 
 // menampilkan data
-recordRoutes.route("/bahanbaku").get(function (req, res) {
+recordRoutes.route("/pesanbahanbaku").get(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   db_connect
-    .collection("bahanbaku")
+    .collection("pesanbahanbaku")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
@@ -25,11 +25,11 @@ recordRoutes.route("/bahanbaku").get(function (req, res) {
 });
 
 // menampilkan data by id
-recordRoutes.route("/bahanbaku/:id").get(function (req, res) {
+recordRoutes.route("/pesanbahanbaku/:id").get(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myquery = { _id: new ObjectId(req.params.id) };
   db_connect
-    .collection("bahanbaku")
+    .collection("pesanbahanbaku")
     .findOne(myquery, function (err, result) {
       if (err) throw err;
       res.json(result);
@@ -44,15 +44,15 @@ recordRoutes.route("/bahanbaku/:id").get(function (req, res) {
 });
 
 // menambahkan data
-recordRoutes.route("/bahanbaku/add").post(function (req, res) {
+recordRoutes.route("/pesanbahanbaku/add").post(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myObj = {
     nama: req.body.nama,
     stok: req.body.stok,
-    minimum: req.body.minimum
+    status: req.body.status
   };
   db_connect
-    .collection("bahanbaku")
+    .collection("pesanbahanbaku")
     .insertOne(myObj, function (err, result) {
       if (err) throw err;
       res.json(result);
@@ -67,18 +67,18 @@ recordRoutes.route("/bahanbaku/add").post(function (req, res) {
 });
 
 // mengupdate data
-recordRoutes.route("/bahanbaku/update/:id").put(function (req, res) {
+recordRoutes.route("/pesanbahanbaku/update/:id").put(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myquery = { _id: new ObjectId(req.params.id) };
   let newValues = {
     $set: {
       nama: req.body.nama,
       stok: req.body.stok,
-      minimum: req.body.minimum,
+      status: req.body.status,
     },
   };
   db_connect
-    .collection("bahanbaku")
+    .collection("pesanbahanbaku")
     .updateOne(myquery, newValues, function (err, result) {
       if (err) throw err;
       console.log("berhasil update bahan baku");
@@ -94,11 +94,11 @@ recordRoutes.route("/bahanbaku/update/:id").put(function (req, res) {
 });
 
 // menghapus data
-recordRoutes.route("/bahanbaku/delete/:id").delete(function (req, res) {
+recordRoutes.route("/pesanbahanbaku/delete/:id").delete(function (req, res) {
   let db_connect = dbo.getDb("estehindonesia");
   let myquery = { _id: new ObjectId(req.params.id) };
   db_connect
-    .collection("bahanbaku")
+    .collection("pesanbahanbaku")
     .deleteOne(myquery, function (err, result) {
       if (err) throw err;
       console.log("bahan baku berhasil dihapus");

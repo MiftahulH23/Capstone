@@ -2,6 +2,8 @@ import React, { isValidElement, useState, useEffect } from "react";
 import { GetData } from "./Api";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { currentDatetime } from "./format";
+
 export const PembayaranCard = () => {
   return (
     <div className="grid place-items-center">
@@ -63,35 +65,114 @@ export const GrafikCard = () => {
 };
 
 export const PesananCard = () => {
+  const Produk = () => {
+    const { users } = GetData("http://localhost:5000/produk");
+    console.log(users);
+    return users;
+  };
+  const Bahan = () => {
+    const { users } = GetData("http://localhost:5000/bahanbaku");
+    console.log(users);
+    return users;
+  };
+  const dataProduk = Produk();
+  const dataBahanbaku = Bahan();
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = {
+      namacustomer: event.target.namacustomer.value,
+      menu: event.target.menu.value,
+      jumlah: event.target.jumlah.value,
+      harga: event.target.harga.value,
+      namakasir: event.target.namakasir.value,
+      metodepembayaran: event.target.metodepembayaran.value,
+      jenispesanan: event.target.jenispesanan.value,
+      tanggalwaktu: currentDatetime(),
+      total: event.target.totalharga.value,
+    }
+
+    const product = dataProduk?.data.find((item) => item.nama === data.menu)
+
+    axios
+      .post(`http://127.0.0.1:5000/penjualan/add`, data)
+      .then((res) => {
+        console.log(res);
+        console.log({product})
+
+        product.komposisi?.map((el) => {
+          dataBahanbaku?.data?.map((item) => {
+            if (el[0].toLowerCase() === item.nama.toLowerCase()) {
+              axios
+                .put(`http://localhost:5000/bahanbaku/update/${item._id}`, {
+                  nama: item.nama,
+                  minimum: item.minimum,
+                  stok: parseInt(item.stok) - parseInt(el[1]) * parseInt(data.jumlah),
+                })
+                .then((res) => {
+                  console.log(res);
+                  console.log("material updated");
+                })
+                .catch((err) => {
+                  console.error(err);
+                  console.info("update material failed");
+                });
+            } else {
+              console.info("material not found");
+            }
+          });
+        });
+        event.target.reset();
+        alert("Pesanan berhasil");
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Gagal");
+      })
+  };
+
+  const [jumlah, setJumlah] = React.useState(0)
+  const [harga, setHarga] = React.useState(0)
+  const total = parseInt(jumlah) * parseInt(harga)
+
   return (
     <div className="bg-white aspect-[4/2]">
       <p className="px-4 py-2">Input Pesanan</p>
-      <div className="grid grid-cols-2 px-4 py-2 gap-4">
+      <form onSubmit={handleSubmit} className="grid grid-cols-2 px-4 py-2 gap-4">
         <div className="w-full flex flex-col gap-2 ">
           <input
             type="text"
             className="px-4 py-2 border-2 w-full rounded-lg"
-            placeholder="Nomor Antrian"
-          />
-          <input
-            type="text"
-            className="px-4 py-2 border-2 w-full rounded-lg"
             placeholder="Nama Customer"
+            name="namacustomer"
+            id="namacustomer"
           />
-          <input
+          <select
             type="text"
             className="px-4 py-2 border-2 w-full rounded-lg"
-            placeholder="Menu"
-          />
+            name="menu"
+            id="menu"
+          >
+            {dataProduk?.data?.map((item) => (
+              <option value={item.nama}>{item.nama}</option>
+            ))}
+          </select>
           <input
             type="text"
             className="px-4 py-2 border-2 w-full rounded-lg"
             placeholder="Jumlah"
-          />
+            name="jumlah"
+            id="jumlah"
+            onChange={(e) => setJumlah(e.target.value)}
+            />
           <input
             type="text"
             className="px-4 py-2 border-2 w-full rounded-lg"
             placeholder="Harga"
+            name="harga"
+            id="harga"
+            onChange={(e) => setHarga(e.target.value)}
           />
         </div>
         <div className="w-full flex flex-col gap-2 ">
@@ -99,41 +180,53 @@ export const PesananCard = () => {
             type="text"
             className="px-4 py-2 border-2 w-full rounded-lg"
             placeholder="Nama Kasir"
+            name="namakasir"
+            id="namakasir"
           />
-          <input
+          <select
             type="text"
             className="px-4 py-2 border-2 w-full rounded-lg"
             placeholder="Metode Pembayaran"
-          />
-          <input
+            name="metodepembayaran"
+            id="metodepembayaran"
+          >
+            <option value="cash">Cash</option>
+            <option value="gopay">Gopay</option>
+            <option value="credit">Kartu Kredit</option>
+          </select>
+          <select
             type="text"
             className="px-4 py-2 border-2 w-full rounded-lg"
             placeholder="Jenis Pesanan"
-          />
-          <input
-            type="datetime-local"
-            className="px-4 py-2 border-2 w-full rounded-lg"
-            placeholder="Tanggal & Waktu"
-          />
+            name="jenispesanan"
+            id="jenispesanan"
+          >
+            <option value="dine in">Dine In</option>
+            <option value="take away">Take Away</option>
+          </select>
           <input
             type="text"
             className="px-4 py-2 border-2 w-full rounded-lg"
             placeholder="Total Harga"
+            name="totalharga"
+            id="totalharga"
+            value={total}
           />
         </div>
-      </div>
-      <div className="w-full px-4">
-        <input
-          type="text"
-          className="w-full px-4 py-8 border-2 rounded-lg"
-          placeholder="Keterangan(opsional)"
-        />
-      </div>
-      <div className="flex justify-end px-4 py-4">
-        <button className="px-6 py-2 bg-hijau text-white rounded-lg">
-          Input Pesanan
-        </button>
-      </div>
+
+        <div className="w-full px-4">
+          <input
+            type="text"
+            className="w-full px-4 py-8 border-2 rounded-lg"
+            placeholder="Keterangan(opsional)"
+          />
+        </div>
+        <div className="flex justify-end px-4 py-4">
+          <button className="px-6 py-2 bg-hijau text-white rounded-lg" type="submit">
+            Input Pesanan
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
@@ -145,6 +238,7 @@ export const CardProduct = () => {
     return users;
   };
   const dataproduk = Produk();
+
   return (
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
@@ -170,7 +264,7 @@ export const CardProduct = () => {
                 <td>{item.stok ?? "-"}</td>
                 <td>{item.harga ?? 0}</td>
                 <td>
-                  <Link to={"/editproduct"}> 
+                  <Link to={`/editproduct/${item._id}`}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -203,9 +297,79 @@ export const CardBahanBaku = () => {
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
         <p className="text-xl text-hijau font-bold">Daftar Bahan Baku</p>
-        <Link className="bg-hijau rounded-lg px-4 py-2" to={"/inputbahanbaku"}>
-          Tambah Bahan Baku
-        </Link>
+        <div className="flex gap-5">
+          <Link
+            className="bg-hijau rounded-lg px-4 py-2"
+            to={"/inputbahanbaku"}
+          >
+            Tambah Bahan Baku
+          </Link>
+          <Link
+            className="bg-hijau rounded-lg px-4 py-2"
+            to={"/pesanbahanbaku"}
+          >
+            Pesan Bahan Baku
+          </Link>
+        </div>
+      </div>
+      <div className="bg-white aspect-[4/1] px-10 py-10">
+        <table className="table-auto w-full">
+          <thead>
+            <tr>
+              <th>Nama Bahan Baku</th>
+              <th>Stock</th>
+              <th>Minimum</th>
+              <th>Keterangan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {databahanbaku?.data.map((item) => (
+              <tr>
+                <td>{item.nama ?? "-"}</td>
+                <td>{item.stok ?? "-"}</td>
+                <td>{item.minimum ?? "-"}</td>
+                <td>
+                  {item.stok <= item.minimum ? (
+                    <span className="text-red-500">Perlu dipesan</span>
+                  ) : (
+                    "Stok cukup"
+                  )}
+                </td>
+                <td>
+                  <Link to={`/editbahanbaku/${item._id}`}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-pen"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                    </svg>
+                  </Link>
+                </td>
+              </tr>
+            )) ?? <tr>Produk Tidak tersedia</tr>}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export const CardPesananBahanBaku = () => {
+  const Bahanbaku = () => {
+    const { users } = GetData("http://localhost:5000/pesanbahanbaku");
+    console.log(users);
+    return users;
+  };
+  const datapesananbahanbaku = Bahanbaku();
+  return (
+    <div>
+      <div className=" flex justify-between py-4 mt-10 items-center">
+        <p className="text-xl text-hijau font-bold">Daftar Pesanan Masuk</p>
       </div>
       <div className="bg-white aspect-[4/1] px-10 py-10">
         <table className="table-auto w-full">
@@ -217,11 +381,24 @@ export const CardBahanBaku = () => {
             </tr>
           </thead>
           <tbody>
-            {databahanbaku?.data.map((item) => (
+            {datapesananbahanbaku?.data.map((item) => (
               <tr>
                 <td>{item.nama ?? "-"}</td>
                 <td>{item.stok ?? "-"}</td>
-                <td></td>
+                <td>
+                  <Link to={`/editbahanbaku/${item._id}`}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-pen"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                    </svg>
+                  </Link>
+                </td>
               </tr>
             )) ?? <tr>Produk Tidak tersedia</tr>}
           </tbody>

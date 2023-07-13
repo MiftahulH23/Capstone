@@ -21,6 +21,8 @@ import Inputbahanbaku from "./pages/Inputbahanbaku";
 import Inputbahanbakusupplier from "./pages/Inputbahanbakusupplier";
 import Register from "./pages/register";
 import Editproduct from "./pages/Editproduct";
+import Editbahanbaku from "./pages/Editbahanbaku";
+import Pesanbahanbaku from "./pages/Pesanbahanbaku";
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -74,7 +76,9 @@ function App() {
                     <Route path="/bahanbaku" element={<Bahanbaku />} />
                     <Route path="/inputpesanan" element={<InputPesanan />} />
                     <Route path="/inputproduk" element={<Inputproduk />} />
-                    <Route path="/editproduct" element={<Editproduct />} />
+                    <Route path="/pesanbahanbaku" element={<Pesanbahanbaku />} />
+                    <Route path="/editproduct/:id" element={<Editproduct />} />
+                    <Route path="/editbahanbaku/:id" element={<Editbahanbaku />} />
                     <Route
                       path="/inputbahanbaku"
                       element={<Inputbahanbaku />}

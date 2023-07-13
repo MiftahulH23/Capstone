@@ -35,7 +35,7 @@ const CardMenu = (props) => {
         </div>
       </div>
     </div>
-  );
+);
 };
 
 const Menu = () => {

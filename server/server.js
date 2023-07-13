@@ -24,8 +24,10 @@ const supplier = require("./routes/supplier");
 const pelanggan = require("./routes/pelanggan");
 const produk = require("./routes/produk");
 const bahanbaku = require("./routes/bahanbaku");
+const pesanbahanbaku = require("./routes/pesanbahanbaku");
 const bahanbakusupplier = require("./routes/bahanbakusupplier"); //
+const penjualan = require("./routes/penjualan"); //
 
 
 // use routes
-app.use([user, kasir, supplier, pelanggan, produk, bahanbaku, bahanbakusupplier]);
+app.use([user, kasir, supplier, pelanggan, produk, bahanbaku, bahanbakusupplier,pesanbahanbaku,penjualan]);
