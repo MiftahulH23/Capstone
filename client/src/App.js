@@ -97,7 +97,7 @@ function App() {
                       element={<Inputbahanbakusupplier />}
                     />
                     <Route path="/pesananmasuk" element={<Pesananmasuk />} />
-                    <Route path="/pengirimanbahanbaku" element={<Pengirimanbahanbaku />} />
+                    <Route path="/pengirimanbahanbaku/:id" element={<Pengirimanbahanbaku />} />
                   </>
                 ) : (
                   <>

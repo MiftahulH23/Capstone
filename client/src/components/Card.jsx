@@ -292,7 +292,8 @@ export const CardBahanBaku = () => {
     console.log(users);
     return users;
   };
-  const databahanbaku = Bahanbaku();
+  const databahanbaku = Bahanbaku()
+
   return (
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
@@ -351,7 +352,7 @@ export const CardBahanBaku = () => {
                   </Link>
                 </td>
               </tr>
-            )) ?? <tr>Produk Tidak tersedia</tr>}
+            )) ?? <tr>Bahan Tidak tersedia</tr>}
           </tbody>
         </table>
       </div>
@@ -366,13 +367,15 @@ export const CardPesananBahanBaku = () => {
     return users;
   };
   const datapesananbahanbaku = Bahanbaku();
+  const dataPesanan = datapesananbahanbaku?.data?.filter(item => item.status !== 'diterima')
+
   return (
     <div>
       <div className=" flex justify-between py-4 mt-10 items-center">
         <p className="text-xl text-hijau font-bold">Daftar Pesanan Masuk</p>
       </div>
       <div className="bg-white aspect-[4/1] px-10 py-10">
-        <table className="table-auto w-full">
+        <table cleassName="table-auto w-full">
           <thead>
             <tr>
               <th>Nama Bahan Baku</th>
@@ -381,17 +384,17 @@ export const CardPesananBahanBaku = () => {
             </tr>
           </thead>
           <tbody>
-            {datapesananbahanbaku?.data.map((item) => (
+            {dataPesanan?.map((item) => (
               <tr>
                 <td>{item.nama ?? "-"}</td>
-                <td>{item.stok ?? "-"}</td>
+                <td>{item.stok ?? 0}</td>
                 <td>
-                  <Link to={`/pengirimanbahanbaku`}>
+                  <Link to={`/pengirimanbahanbaku/${item._id}`}>
                     <p>Kirim</p>
                   </Link>
                 </td>
               </tr>
-            )) ?? <tr>Produk Tidak tersedia</tr>}
+            )) ?? <tr>Pesanan Tidak tersedia</tr>}
           </tbody>
         </table>
       </div>
