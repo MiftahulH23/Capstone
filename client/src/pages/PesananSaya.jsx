@@ -5,7 +5,7 @@ import CardPesananSaya from "../components/CardPesananSaya";
 import axios from 'axios';
 
 const PesananSaya = () => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(1);
   const handleCount = () => {
     setCount((prev) => prev + 1);
   }
