@@ -59,7 +59,7 @@ export const PembayaranCard = ({ count }) => {
           id="pembayaran"
           className="border-2 w-full px-4 mb-4 rounded-lg"
         >
-          <option value="cash">Cash</option>
+          <option value="cash">COD</option>
           <option value="credit">Credit Card</option>
         </select>
         <button type="submit" className="w-full px-4 mb-4 rounded-lg bg-hijau">
