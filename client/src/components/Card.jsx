@@ -51,7 +51,7 @@ export const PembayaranCard = ({ count }) => {
           type="text"
           name="alamat"
           className="border-2 w-full px-4 mb-4 rounded-lg"
-          placeholder="Jumlah"
+          placeholder="alamat"
         />
         <label htmlFor="">Pembayaran</label>
         <select
@@ -468,7 +468,6 @@ export const CardBahanBakuSupplier = () => {
             <tr>
               <th>Nama Bahan Baku</th>
               <th>Stock</th>
-              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -476,7 +475,6 @@ export const CardBahanBakuSupplier = () => {
               <tr>
                 <td>{item.nama ?? "-"}</td>
                 <td>{item.stok ?? "-"}</td>
-                <td></td>
               </tr>
             )) ?? <tr>Produk Tidak tersedia</tr>}
           </tbody>
