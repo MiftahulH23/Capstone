@@ -13,6 +13,8 @@ const Dashboard = () => {
         <ScoreCard judul={"Menu Terlaris"} ket={"Dalam Bulan ini"} icon={<CupIcon/>} subjudul={"Esteh Susu Nusantara"} desc={"Total penjualan:350"} />
       </div>
       <GrafikCard /> */}
+
+      {/* Tess */}
     </div>
   )
 }
